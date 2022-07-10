@@ -39,5 +39,3 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# For TMC/Test My Code
-source /home/shuvojit/.tmc-autocomplete.sh || true

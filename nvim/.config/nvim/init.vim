@@ -1,6 +1,10 @@
 " disable creation of .swp (swap) files 
 set noswapfile
 
+set so=8
+" Set scroll off
+set so=8
+
 " Per line character guide
 let &colorcolumn=join(range(81,999),",")
 let &colorcolumn="80,".join(range(400,999),",")
@@ -47,7 +51,6 @@ call plug#begin()
     Plug 'preservim/nerdtree'
     " Note Keeping
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-    Plug 'puremourning/vimspector'
 call plug#end()
 
 
@@ -120,9 +123,8 @@ let g:airline_section_c = '%{pathshorten(expand(''%:f''))}'
 " Telescope Shorcuts
 nnoremap <C-P> <cmd>Telescope find_files prompt_prefix=🔍<cr>
 nmap <leader>p <cmd>Telescope commands prompt_prefix=🔍<cr>
-nmap <leader>b <cmd>Telescope buffers prompt_prefix=🔍<cr>
-nmap <leader>ca <cmd>CocAction<cr>
-
+nmap <leader>b <cmd>Telescope git_branches prompt_prefix=🔍<cr>
+nmap <leader>ca <Plug>(coc-codeaction)
 
 
 " FileType based indentation
@@ -131,16 +133,22 @@ filetype indent on
 filetype plugin on
 filetype indent plugin on
 
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
-" For Vimspector
-nnoremap <Leader>dd :call vimspector#Launch()<CR>
-nnoremap <Leader>de :call vimspector#Reset()<CR>
-nnoremap <Leader>dc :call vimspector#Continue()<CR>
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
 
-nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
-nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
 
-nmap <Leader>dk <Plug>VimspectorRestart
-nmap <Leader>dh <Plug>VimspectorStepOut
-nmap <Leader>dl <Plug>VimspectorStepInto
-nmap <Leader>dj <Plug>VimspectorStepOver
+
