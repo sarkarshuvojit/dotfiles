@@ -1,5 +1,6 @@
 " disable creation of .swp (swap) files 
 set noswapfile
+set so=15
 
 " Per line character guide
 let &colorcolumn=join(range(81,999),",")
@@ -48,6 +49,13 @@ call plug#begin()
     " Note Keeping
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
     Plug 'puremourning/vimspector'
+
+    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'nvim-treesitter/nvim-treesitter-context'
+
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+    Plug 'kdheepak/lazygit.nvim'
 call plug#end()
 
 
@@ -55,6 +63,9 @@ call plug#end()
 set termguicolors
 let ayucolor="dark"
 colorscheme ayu
+
+" Bg Transparent
+hi Normal guibg=NONE ctermbg=NONE
 
 " IndentLine {{
 let g:indentLine_char = '▏'
@@ -70,7 +81,7 @@ set pastetoggle=<F2>
 nnoremap <C-P> <cmd>Telescope find_files<cr>
 
 " Load lang rules for js
-autocmd Filetype javascript source ./lang/javascript.vim
+" autocmd Filetype javascript source ./lang/javascript.vim
 
 " Toggle NerdTreeWindow
 nmap <leader>nt <cmd>NERDTreeToggle <CR>
@@ -80,7 +91,8 @@ nmap <leader>nt <cmd>NERDTreeToggle <CR>
 "   Shortucts 
 
 " git status
-nmap <leader>gs :G <CR>
+" nmap <leader>gs :G <CR>
+nmap <leader>gs :LazyGit <CR>
 
 " git commit 
 nmap <leader>gc :G commit <CR>
@@ -90,6 +102,9 @@ nmap <leader>gp :G push <CR>
 
 " jump to definition
 nmap <leader>jd <Plug>(coc-definition)
+
+" jump to references
+nmap <leader>jr <Plug>(coc-references)
 
 " smart rename symbol
 nmap <leader>rs <Plug>(coc-rename)
@@ -121,7 +136,7 @@ let g:airline_section_c = '%{pathshorten(expand(''%:f''))}'
 nnoremap <C-P> <cmd>Telescope find_files prompt_prefix=🔍<cr>
 nmap <leader>p <cmd>Telescope commands prompt_prefix=🔍<cr>
 nmap <leader>b <cmd>Telescope buffers prompt_prefix=🔍<cr>
-nmap <leader>ca <cmd>CocAction<cr>
+nmap <leader>ca <Plug>(coc-codeaction)
 
 
 
@@ -132,15 +147,33 @@ filetype plugin on
 filetype indent plugin on
 
 
-" For Vimspector
-nnoremap <Leader>dd :call vimspector#Launch()<CR>
-nnoremap <Leader>de :call vimspector#Reset()<CR>
-nnoremap <Leader>dc :call vimspector#Continue()<CR>
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
-nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
-nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
 
-nmap <Leader>dk <Plug>VimspectorRestart
-nmap <Leader>dh <Plug>VimspectorStepOut
-nmap <Leader>dl <Plug>VimspectorStepInto
-nmap <Leader>dj <Plug>VimspectorStepOver
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Golang shortcuts
+autocmd FileType go nmap <leader>b  <cmd>GoBuild<CR>
+autocmd FileType go nmap <leader>r  <cmd>GoRun<CR>
+autocmd FileType go nmap <leader>t  <cmd>GoTest<CR>
+
+" NerdTree Line numbers
+" =======================
+
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber

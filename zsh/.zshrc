@@ -26,7 +26,7 @@ bindkey "^R" history-incremental-search-backward
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/shuvojit/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/shuvojit/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -41,3 +41,57 @@ unset __conda_setup
 
 # For TMC/Test My Code
 source /home/shuvojit/.tmc-autocomplete.sh || true
+
+# Direnv
+eval "$(direnv hook zsh)"
+
+# Alias
+alias hs='cd /home/shuvojit/Workspace/healthi.in/healthi2.0-services/';
+
+# PATH
+export PATH=/home/shuvojit/Apps/scripts/:$PATH
+
+#export COMPOSE_DOCKER_CLI_BUILD=1
+#export DOCKER_BUILDKIT=1
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+# Android Sdk
+export ANDROID_HOME=/home/shuvojit/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/emulator
+
+# JMETER_BIN
+export JMETER_BIN=/home/shuvojit/Apps/apache-jmeter-5.4.3/bin/
+export PATH=$PATH:$JMETER_BIN
+
+# Flutter
+export FLUTTER_BIN=/home/shuvojit/Apps/flutter_linux_3.0.5-stable/flutter/bin/
+export PATH=$PATH:$FLUTTER_BIN
+
+# AzCopy
+export AZCOPY_BIN=/home/shuvojit/Apps/azcopy_linux_amd64_10.16.0/
+export PATH=$PATH:$AZCOPY_BIN
+
+
+# Gopath
+export GOPATH=/home/shuvojit/go/
+export PATH=$PATH:$GOPATH/bin/
+export PATH=$PATH:/usr/local/go/bin/
+
+
+# source /home/shuvojit/Workspace/scratchfolder/healthi-cli-go/.envrc
+#
+
+alias kc=kubectl
+
+alias ljenkins="source /home/shuvojit/Workspace/scratchfolder/healthi-cli-go/.envrc.jenkins-healthi"
+
+alias lg=lazygit
+
+alias dk=docker
+alias dkc=docker-compose
