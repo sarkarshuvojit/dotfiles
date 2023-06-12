@@ -51,6 +51,11 @@ call plug#begin()
     Plug 'preservim/nerdtree'
     " Note Keeping
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+    Plug 'kdheepak/lazygit.nvim'
+
+    " Go specific 
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 
@@ -73,7 +78,7 @@ set pastetoggle=<F2>
 nnoremap <C-P> <cmd>Telescope find_files<cr>
 
 " Load lang rules for js
-autocmd Filetype javascript source ./lang/javascript.vim
+" autocmd Filetype javascript source ./lang/javascript.vim
 
 " Toggle NerdTreeWindow
 nmap <leader>nt <cmd>NERDTreeToggle <CR>
@@ -83,7 +88,7 @@ nmap <leader>nt <cmd>NERDTreeToggle <CR>
 "   Shortucts 
 
 " git status
-nmap <leader>gs :G <CR>
+nmap <leader>gs :LazyGit <CR>
 
 " git commit 
 nmap <leader>gc :G commit <CR>

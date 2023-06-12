@@ -39,3 +39,26 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+export GOPATH="/home/shuvojit/go"
+export PATH=$PATH:$GOPATH/bin
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+export FLUTTER_HOME="/home/shuvojit/apps/flutter"
+export FLUTTER_BIN="$FLUTTER_HOME/bin"
+export PATH="$PATH:$FLUTTER_BIN"
+
+# Conda cli tool path
+export PATH="$PATH:/home/shuvojit/.local/bin"
+
+alias lg=lazygit
+
+# Custom Binaries
+export PATH="$PATH:/home/shuvojit/apps/bin"
+
+alias dk=docker
+alias dkc=docker-compose
+alias os="cd /home/shuvojit/Workspace/shuvojit/opensource"
+alias scr="cd /home/shuvojit/Workspace/scratchfolder"

@@ -54,7 +54,7 @@ window:
   startup_mode: Windowed
 
   # Background opacity
-  opacity: 1.0
+  opacity: 0.8
 
 scrolling:
   # maximum number of lines in the scrollback buffer. Specifying '0' will
@@ -70,8 +70,9 @@ font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
   normal:
+    family: DejaVu Sans Mono for Powerline
     # family: "Fantasque Sans Mono"
-    family: "Jetbrains Mono"
+    # family: "Lotion"
     # style: Light
     # family: "Fira Code"
     # family: "Source Code Pro"
@@ -79,8 +80,8 @@ font:
 
   # The bold font face
   bold:
-    family: "Jetbrains Mono"
-    style: Medium
+    family: DejaVu Sans Mono for Powerline
+    style: Bold
     # family: "Fira Code"
     # family: "Source Code Pro"
 
@@ -527,8 +528,8 @@ debug:
 # Entries in shell.args are passed unmodified as arguments to the shell. =>
 shell:
   program: /usr/local/bin/zsh
-  args:
-    - -l
-    - -c
-    - "tmux -u"
+    #  args:
+    #    - -l
+    #    - -c
+    #    - "/home/shuvojit/apps/bin/zellij"
 # vim: nospell
