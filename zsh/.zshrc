@@ -62,3 +62,4 @@ alias dk=docker
 alias dkc=docker-compose
 alias os="cd /home/shuvojit/Workspace/shuvojit/opensource"
 alias scr="cd /home/shuvojit/Workspace/scratchfolder"
+alias v=nvim
