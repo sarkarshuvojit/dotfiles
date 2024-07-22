@@ -59,6 +59,9 @@ call plug#begin()
 
     " Project-Wide Search
     Plug 'mileszs/ack.vim'
+
+    " Splash Screen
+    Plug 'mhinz/vim-startify'
 call plug#end()
 
 
@@ -101,6 +104,9 @@ nmap <leader>gp :G push <CR>
 
 " jump to definition
 nmap <leader>jd <Plug>(coc-definition)
+
+" jump to definition
+nmap <leader>jr <Plug>(coc-references)
 
 " smart rename symbol
 nmap <leader>rs <Plug>(coc-rename)
