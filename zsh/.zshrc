@@ -18,6 +18,31 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+
+load-nvmrc() {
+  local nvmrc_path
+  nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version
+    nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
+      nvm use
+    fi
+  elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
 
 # Enable vi mode
 bindkey -v
@@ -59,7 +84,24 @@ alias lg=lazygit
 export PATH="$PATH:/home/shuvojit/apps/bin"
 
 alias dk=docker
-alias dkc=docker-compose
+alias dkc="docker compose"
 alias os="cd /home/shuvojit/Workspace/shuvojit/opensource"
 alias scr="cd /home/shuvojit/Workspace/scratchfolder"
 alias v=nvim
+
+# Wiring in direnv
+eval "$(direnv hook zsh)"
+
+[[ -s "/home/shuvojit/.gvm/scripts/gvm" ]] && source "/home/shuvojit/.gvm/scripts/gvm"
+
+# Load sdk tools to path
+export ANDROID_SDK_PATH="/home/shuvojit/Android/Sdk"
+export PATH="$PATH:$ANDROID_SDK_PATH/tools:$ANDROID_SDK_PATH/emulator"
+
+
+# Load Dart Version Manager
+if [[ -f ~/.dvm/scripts/dvm ]]; then
+  . ~/.dvm/scripts/dvm
+fi
+
+alias wsj="cd /home/shuvojit/Workspace"
