@@ -59,6 +59,10 @@ call plug#begin()
 
     " Project-Wide Search
     Plug 'mileszs/ack.vim'
+
+    " Splash Screen
+    Plug 'mhinz/vim-startify'
+
 call plug#end()
 
 

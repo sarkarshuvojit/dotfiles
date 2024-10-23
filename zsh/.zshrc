@@ -39,9 +39,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# For TMC/Test My Code
-source /home/shuvojit/.tmc-autocomplete.sh || true
-
 # Direnv
 eval "$(direnv hook zsh)"
 
@@ -70,11 +67,11 @@ export JMETER_BIN=/home/shuvojit/Apps/apache-jmeter-5.4.3/bin/
 export PATH=$PATH:$JMETER_BIN
 
 # Flutter
-export FLUTTER_BIN=/home/shuvojit/Apps/flutter_linux_3.0.5-stable/flutter/bin/
+export FLUTTER_BIN=/home/shuvojit/Apps/flutter_linux_3.7.0-stable/flutter/bin/
 export PATH=$PATH:$FLUTTER_BIN
 
 # AzCopy
-export AZCOPY_BIN=/home/shuvojit/Apps/azcopy_linux_amd64_10.16.0/
+export AZCOPY_BIN=/home/shuvojit/Apps/azcopy_linux_amd64_10.22.2
 export PATH=$PATH:$AZCOPY_BIN
 
 
@@ -84,9 +81,6 @@ export PATH=$PATH:$GOPATH/bin/
 export PATH=$PATH:/usr/local/go/bin/
 
 
-# source /home/shuvojit/Workspace/scratchfolder/healthi-cli-go/.envrc
-#
-
 alias kc=kubectl
 
 alias ljenkins="source /home/shuvojit/Workspace/scratchfolder/healthi-cli-go/.envrc.jenkins-healthi"
@@ -95,3 +89,14 @@ alias lg=lazygit
 
 alias dk=docker
 alias dkc=docker-compose
+
+alias v="unset SERVER_PORT && nvim"
+
+alias kpr="kubectl -n preprod"
+
+# Kafka CLI Tools
+export PATH=$PATH:/home/shuvojit/Apps/kafka_cli/bin/
+
+# Chrome Web Driver
+export PATH=$PATH:/home/shuvojit/Apps/chromedriver_linux64/
+
