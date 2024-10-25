@@ -32,7 +32,7 @@ set expandtab
 inoremap ii <Esc>
 
 call plug#begin()
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'ayu-theme/ayu-vim' " or other package manager
     Plug 'Yggdroot/indentLine'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
