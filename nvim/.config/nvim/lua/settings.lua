@@ -14,3 +14,5 @@ vim.o.termguicolors = true
 
 
 vim.cmd("colorscheme cyberdream")
+
+vim.cmd("autocmd VimEnter * doautocmd FileType")
