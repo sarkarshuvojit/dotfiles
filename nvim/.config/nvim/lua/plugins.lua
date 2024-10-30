@@ -14,4 +14,23 @@ return require('packer').startup(function(use)
 			"nvim-lua/plenary.nvim",
 		},
 	})
+
+    -- To manage lsp's better. 
+    use {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
+    }
+    
+    use {
+        "nvim-treesitter/nvim-treesitter",
+        opts = {
+            ensure_installed = {
+                "graphql",
+            },
+        }
+    }
+
 end)
+
+

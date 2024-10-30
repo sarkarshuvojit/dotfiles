@@ -3,8 +3,6 @@ local util = require 'lspconfig.util'
 local lspconfig = require 'lspconfig'
 local on_attach = function(client, bufnr)
     print("[ts_ls.on_attach]: LSP started.");
-
-	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     -- jump to definition
     vim.keymap.set('n','<leader>jd', vim.lsp.buf.definition, { noremap = true, buffer = bufnr , silent = false})
 
@@ -22,7 +20,7 @@ local on_attach = function(client, bufnr)
 
 end
 
-lspconfig.ts_ls.setup {
+lspconfig.graphql.setup {
     on_attach = on_attach,
     root_dir = function (pattern)
         local cwd  = vim.loop.cwd();
@@ -31,3 +29,4 @@ lspconfig.ts_ls.setup {
     end,
     autostart = true
 }
+

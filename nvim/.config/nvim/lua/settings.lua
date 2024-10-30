@@ -13,6 +13,8 @@ vim.bo.expandtab = true
 vim.o.termguicolors = true
 
 
-vim.cmd("colorscheme cyberdream")
+vim.cmd("colorscheme lunaperche")
 
 vim.cmd("autocmd VimEnter * doautocmd FileType")
+
+vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
