@@ -88,7 +88,17 @@ require('lazy').setup({
     keys = {
         { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
     }
-  }
+  },
+  {
+    'akinsho/flutter-tools.nvim',
+    lazy = false,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+  },
+  -- File Explorer
+  {'preservim/nerdtree'}
 })
 ---- END ----
 
@@ -173,7 +183,8 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Telescope diagnostics' })
-vim.keymap.set('n', '<leader>@', builtin.treesitter, { desc = 'Telescope diagnostics' })
+vim.keymap.set('n', '<leader>@', builtin.treesitter, { desc = 'Telescope treesitter' })
+vim.keymap.set('n', '<leader>nt', ':NERDTreeToggle<CR>', { desc = 'File manager ' })
 
 -- setup lualine
 require('lualine').setup()
@@ -198,3 +209,20 @@ vim.cmd('colorscheme tokyonight-storm')
 
 -- setting up dropbar
 vim.ui.select = require('dropbar.utils.menu').select
+
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '✘',
+      [vim.diagnostic.severity.WARN] = '▲',
+      [vim.diagnostic.severity.HINT] = '⚑',
+      [vim.diagnostic.severity.INFO] = '»',
+    },
+  },
+})
+
+
+-- if directory is openeed also open NerdTree
+if next(vim.fn.argv()) == nil then
+    vim.cmd('autocmd VimEnter * NERDTree | wincmd p')
+end
